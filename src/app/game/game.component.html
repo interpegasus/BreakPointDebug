@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Game List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{ game.event.title }}</td>        
+        <td>Show Detail</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
