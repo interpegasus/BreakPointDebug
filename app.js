@@ -6,7 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var localhost = true;
-var Redis = require('ioredis');
+
 var localhost = true;
 const developmentMode = true;
 module.exports = { localhost: localhost };
@@ -26,21 +26,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Database
-var mongoose = require('mongoose');
-let dbUrl = (developmentMode === true) ? 'mongodb://br_dev_user:br2019mvdev@127.0.0.1:27017/br_dev' : ''
-
-mongoose.connect(dbUrl, { useNewUrlParser: true })
-    .then(() => console.log('connection succesful'))
-    .catch((err) => console.error(err));
-
-// Admin 
-var mongo_express = require('mongo-express/lib/middleware')
-var mongo_express_config = require('./mongo-express-config')
-app.use('/admin', mongo_express(mongo_express_config))
-
-// Redis
-var redis = localhost ? new Redis('redis://localhost:6379/' + 1 + '/br') : new Redis('redis://localhost:6379/' + 1 + '/br')
 
 // Cron Jobs
 var cron = require('node-cron');
